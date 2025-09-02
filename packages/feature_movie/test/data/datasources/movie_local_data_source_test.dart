@@ -1,3 +1,4 @@
+import 'package:core/common/exception.dart';
 import 'package:feature_movie/data/datasources/movie_local_data_source.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -8,6 +9,7 @@ import '../../helpers/test_helper.mocks.dart';
 void main() {
   late MovieLocalDataSourceImpl dataSource;
   late MockDatabaseHelper mockDatabaseHelper;
+  const tableName = 'watchlist_movie';
 
   setUp(() {
     mockDatabaseHelper = MockDatabaseHelper();
@@ -18,7 +20,7 @@ void main() {
     test('should return success message when insert to database is success',
         () async {
       // arrange
-      when(mockDatabaseHelper.insertWatchlistMovie(testMovieTable))
+      when(mockDatabaseHelper.insert(tableName, testMovieTable.toJson()))
           .thenAnswer((_) async => 1);
       // act
       final result = await dataSource.insertWatchlistMovie(testMovieTable);
@@ -29,7 +31,7 @@ void main() {
     test('should throw DatabaseException when insert to database is failed',
         () async {
       // arrange
-      when(mockDatabaseHelper.insertWatchlistMovie(testMovieTable))
+      when(mockDatabaseHelper.insert(tableName, testMovieTable.toJson()))
           .thenThrow(Exception());
       // act
       final call = dataSource.insertWatchlistMovie(testMovieTable);
@@ -42,7 +44,7 @@ void main() {
     test('should return success message when remove from database is success',
         () async {
       // arrange
-      when(mockDatabaseHelper.removeWatchlistMovie(testMovieTable))
+      when(mockDatabaseHelper.remove(tableName, testMovieTable.id))
           .thenAnswer((_) async => 1);
       // act
       final result = await dataSource.removeWatchlistMovie(testMovieTable);
@@ -53,7 +55,7 @@ void main() {
     test('should throw DatabaseException when remove from database is failed',
         () async {
       // arrange
-      when(mockDatabaseHelper.removeWatchlistMovie(testMovieTable))
+      when(mockDatabaseHelper.remove(tableName, testMovieTable.id))
           .thenThrow(Exception());
       // act
       final call = dataSource.removeWatchlistMovie(testMovieTable);
@@ -67,7 +69,7 @@ void main() {
 
     test('should return Movie Detail Table when data is found', () async {
       // arrange
-      when(mockDatabaseHelper.getMovieById(tId))
+      when(mockDatabaseHelper.getById(tableName, tId))
           .thenAnswer((_) async => testMovieMap);
       // act
       final result = await dataSource.getMovieById(tId);
@@ -77,7 +79,7 @@ void main() {
 
     test('should return null when data is not found', () async {
       // arrange
-      when(mockDatabaseHelper.getMovieById(tId)).thenAnswer((_) async => null);
+      when(mockDatabaseHelper.getById(tableName, tId)).thenAnswer((_) async => null);
       // act
       final result = await dataSource.getMovieById(tId);
       // assert
@@ -88,7 +90,7 @@ void main() {
   group('get watchlist movies', () {
     test('should return list of MovieTable from database', () async {
       // arrange
-      when(mockDatabaseHelper.getWatchlistMovies())
+      when(mockDatabaseHelper.getWatchlist(tableName))
           .thenAnswer((_) async => [testMovieMap]);
       // act
       final result = await dataSource.getWatchlistMovies();

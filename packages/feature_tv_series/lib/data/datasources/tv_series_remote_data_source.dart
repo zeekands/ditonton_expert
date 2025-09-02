@@ -31,7 +31,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
     if (response.statusCode == 200) {
       return TvSeriesResponse.fromJson(json.decode(response.body)).tvSeriesList;
     } else {
-      throw ServerException();
+      throw ServerException('Failed to connect to the server');
     }
   }
 
@@ -42,7 +42,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
     if (response.statusCode == 200) {
       return TvSeriesDetailResponse.fromJson(json.decode(response.body));
     } else {
-      throw ServerException();
+      throw ServerException('Failed to connect to the server');
     }
   }
 
@@ -55,7 +55,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
     if (response.statusCode == 200) {
       return TvSeriesResponse.fromJson(json.decode(response.body)).tvSeriesList;
     } else {
-      throw ServerException();
+      throw ServerException('Failed to connect to the server');
     }
   }
 
@@ -68,7 +68,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
     if (response.statusCode == 200) {
       return TvSeriesResponse.fromJson(json.decode(response.body)).tvSeriesList;
     } else {
-      throw ServerException();
+      throw ServerException('Failed to connect to the server');
     }
   }
 
@@ -81,7 +81,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
     if (response.statusCode == 200) {
       return TvSeriesResponse.fromJson(json.decode(response.body)).tvSeriesList;
     } else {
-      throw ServerException();
+      throw ServerException('Failed to connect to the server');
     }
   }
 
@@ -94,7 +94,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
     if (response.statusCode == 200) {
       return TvSeriesResponse.fromJson(json.decode(response.body)).tvSeriesList;
     } else {
-      throw ServerException();
+      throw ServerException('Failed to connect to the server');
     }
   }
 }

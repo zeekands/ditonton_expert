@@ -45,7 +45,8 @@ class _MovieContentState extends State<MovieContent> {
                 return state.when(
                   initial: () => SizedBox.shrink(),
                   loading: () => Center(child: CircularProgressIndicator()),
-                  loaded: (movies) => MovieList(movies),
+                  loaded: (movies) =>
+                      MovieList(key: Key('now_playing_movies_list'), movies),
                   error: (message) =>
                       Text(message, key: Key('error_message_now_playing')),
                 );
@@ -62,7 +63,8 @@ class _MovieContentState extends State<MovieContent> {
                 return state.when(
                   initial: () => SizedBox.shrink(),
                   loading: () => Center(child: CircularProgressIndicator()),
-                  loaded: (movies) => MovieList(movies),
+                  loaded: (movies) =>
+                      MovieList(key: Key('popular_movies_list'), movies),
                   error: (message) =>
                       Text(message, key: Key('error_message_popular')),
                 );
@@ -79,7 +81,8 @@ class _MovieContentState extends State<MovieContent> {
                 return state.when(
                   initial: () => SizedBox.shrink(),
                   loading: () => Center(child: CircularProgressIndicator()),
-                  loaded: (movies) => MovieList(movies),
+                  loaded: (movies) =>
+                      MovieList(key: Key('top_rated_movies_list'), movies),
                   error: (message) =>
                       Text(message, key: Key('error_message_top_rated')),
                 );

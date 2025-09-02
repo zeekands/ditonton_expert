@@ -38,9 +38,12 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
             loaded: (movieDetail, recommendations, isAdded, message) {
               if (message == MovieDetailCubit.watchlistAddSuccessMessage ||
                   message == MovieDetailCubit.watchlistRemoveSuccessMessage) {
-                ScaffoldMessenger.of(
-                  context,
-                ).showSnackBar(SnackBar(content: Text(message)));
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    key: Key('watchlist_message'),
+                    content: Text(message),
+                  ),
+                );
               } else if (message.isNotEmpty) {
                 showDialog(
                   context: context,

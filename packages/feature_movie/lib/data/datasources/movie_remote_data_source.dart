@@ -35,14 +35,14 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
       if (response.statusCode == 200) {
         return MovieResponse.fromJson(json.decode(response.body)).movieList;
       } else {
-        throw ServerException();
+        throw ServerException('Failed to connect to the server');
       }
     } on SocketException {
-      throw ServerException();
+      throw ServerException('Failed to connect to the server');
     } on TimeoutException {
-      throw ServerException();
+      throw ServerException('Failed to connect to the server');
     } on FormatException {
-      throw ServerException();
+      throw ServerException('Failed to connect to the server');
     }
   }
 
@@ -56,14 +56,14 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
       if (response.statusCode == 200) {
         return MovieDetailResponse.fromJson(json.decode(response.body));
       } else {
-        throw ServerException();
+        throw ServerException('Failed to connect to the server');
       }
     } on SocketException {
-      throw ServerException();
+      throw ServerException('Failed to connect to the server');
     } on TimeoutException {
-      throw ServerException();
+      throw ServerException('Failed to connect to the server');
     } on FormatException {
-      throw ServerException();
+      throw ServerException('Failed to connect to the server');
     }
   }
 
@@ -77,14 +77,14 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
       if (response.statusCode == 200) {
         return MovieResponse.fromJson(json.decode(response.body)).movieList;
       } else {
-        throw ServerException();
+        throw ServerException('Failed to connect to the server');
       }
     } on SocketException {
-      throw ServerException();
+      throw ServerException('Failed to connect to the server');
     } on TimeoutException {
-      throw ServerException();
+      throw ServerException('Failed to connect to the server');
     } on FormatException {
-      throw ServerException();
+      throw ServerException('Failed to connect to the server');
     }
   }
 
@@ -98,14 +98,14 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
       if (response.statusCode == 200) {
         return MovieResponse.fromJson(json.decode(response.body)).movieList;
       } else {
-        throw ServerException();
+        throw ServerException('Failed to connect to the server');
       }
     } on SocketException {
-      throw ServerException();
+      throw ServerException('Failed to connect to the server');
     } on TimeoutException {
-      throw ServerException();
+      throw ServerException('Failed to connect to the server');
     } on FormatException {
-      throw ServerException();
+      throw ServerException('Failed to connect to the server');
     }
   }
 
@@ -119,14 +119,14 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
       if (response.statusCode == 200) {
         return MovieResponse.fromJson(json.decode(response.body)).movieList;
       } else {
-        throw ServerException();
+        throw ServerException('Failed to connect to the server');
       }
     } on SocketException {
-      throw ServerException();
+      throw ServerException('Failed to connect to the server');
     } on TimeoutException {
-      throw ServerException();
+      throw ServerException('Failed to connect to the server');
     } on FormatException {
-      throw ServerException();
+      throw ServerException('Failed to connect to the server');
     }
   }
 
@@ -140,14 +140,14 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
       if (response.statusCode == 200) {
         return MovieResponse.fromJson(json.decode(response.body)).movieList;
       } else {
-        throw ServerException();
+        throw ServerException('Failed to connect to the server');
       }
     } on SocketException {
-      throw ServerException();
+      throw ServerException('Failed to connect to the server');
     } on TimeoutException {
-      throw ServerException();
+      throw ServerException('Failed to connect to the server');
     } on FormatException {
-      throw ServerException();
+      throw ServerException('Failed to connect to the server');
     }
   }
 }

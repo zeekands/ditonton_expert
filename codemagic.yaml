@@ -1,4 +1,3 @@
-# codemagic.yaml
 workflows:
   flutter-monorepo-build:
     name: Flutter Ditonton Build
@@ -8,9 +7,9 @@ workflows:
       # API Key untuk TMDB (dikonfigurasi di CodeMagic UI)
       groups:
         - tmdb_api
+
     trigger:
       # Pemicu saat ada push ke branch 'main'
-      # Anda bisa mengganti 'main' dengan nama branch lain (misalnya 'master' atau 'dev')
       branch_patterns:
         - pattern: 'main'
           include: true
@@ -22,6 +21,10 @@ workflows:
           flutter channel stable
           flutter upgrade
           flutter pub global activate melos
+
+      - name: Verify Melos Installation
+        script: |
+          melos --version  # Memastikan bahwa Melos terinstal dengan benar
 
       - name: Get dependencies and link packages
         script: |
@@ -39,7 +42,7 @@ workflows:
         script: |
           # Gunakan 'flutter build apk' untuk membuat APK release
           flutter build apk --release --dart-define=API_KEY=$CM_API_KEY
-        
+
       # --- Build iOS App ---
       - name: Build iOS IPA
         script: |

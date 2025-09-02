@@ -63,3 +63,4 @@ class Movie extends Equatable implements Content {
   @override
   String get contentType => ContentType.movie;
 }
+// ignore_for_file: must_be_immutable

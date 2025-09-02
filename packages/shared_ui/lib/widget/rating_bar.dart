@@ -51,7 +51,7 @@ class RatingBarIndicator extends StatefulWidget {
   final double rating;
 
   @override
-  _RatingBarIndicatorState createState() => _RatingBarIndicatorState();
+  State<RatingBarIndicator> createState() => _RatingBarIndicatorState();
 }
 
 class _RatingBarIndicatorState extends State<RatingBarIndicator> {
@@ -95,7 +95,7 @@ class _RatingBarIndicatorState extends State<RatingBarIndicator> {
         if (widget.textDirection == TextDirection.rtl &&
             Directionality.of(context) != TextDirection.rtl) {
           return Transform(
-            transform: Matrix4.identity()..scale(-1.0, 1.0, 1.0),
+            transform: Matrix4.diagonal3Values(-1.0, 1.0, 1.0),
             alignment: Alignment.center,
             transformHitTests: false,
             child: _buildItems(index),
@@ -173,8 +173,11 @@ class _IndicatorClipper extends CustomClipper<Rect> {
   }
 
   @override
-  bool shouldReclip(_IndicatorClipper oldClipper) {
-    return ratingFraction != oldClipper.ratingFraction ||
-        rtlMode != oldClipper.rtlMode;
+  bool shouldReclip(covariant CustomClipper<Rect> oldClipper) {
+    if (oldClipper is _IndicatorClipper) {
+      return ratingFraction != oldClipper.ratingFraction ||
+          rtlMode != oldClipper.rtlMode;
+    }
+    return true;
   }
 }

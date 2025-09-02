@@ -8,7 +8,7 @@ import 'package:shared_ui/theme.dart';
 class TvSeriesCard extends StatelessWidget {
   final TvSeries tvSeries;
 
-  TvSeriesCard(this.tvSeries);
+  const TvSeriesCard(this.tvSeries, {super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:core/common/failure.dart';
-import 'package:core/domain/usecases/no_params.dart';
 import 'package:feature_movie/domain/usecases/get_top_rated_movies.dart';
 import 'package:feature_movie/presentation/cubit/top_rated/top_rated_movies_cubit.dart';
 import 'package:feature_movie/presentation/cubit/top_rated/top_rated_movies_state.dart';

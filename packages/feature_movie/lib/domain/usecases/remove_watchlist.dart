@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:core/common/failure.dart';
-import 'package:core/domain/usecases/usecase.dart';
 import 'package:feature_movie/domain/entities/movie_detail.dart';
 import 'package:feature_movie/domain/repositories/movie_repository.dart';
 

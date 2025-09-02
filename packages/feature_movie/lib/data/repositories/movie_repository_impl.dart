@@ -122,8 +122,8 @@ class MovieRepositoryImpl implements MovieRepository {
     try {
       final result = await localDataSource.getMovieById(id);
       return result != null;
-    } on DatabaseException catch (e) {
-      throw e;
+    } on DatabaseException {
+      rethrow;
     }
   }
 

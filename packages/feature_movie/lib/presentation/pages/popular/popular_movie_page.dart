@@ -5,17 +5,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PopularMoviesPage extends StatefulWidget {
+  const PopularMoviesPage({super.key});
+
   @override
-  _PopularMoviesPageState createState() => _PopularMoviesPageState();
+  State<PopularMoviesPage> createState() => _PopularMoviesPageState();
 }
 
 class _PopularMoviesPageState extends State<PopularMoviesPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(
-      () => context.read<PopularMoviesCubit>().fetchPopularMovies(),
-    );
+    final cubit = context.read<PopularMoviesCubit>();
+    Future.microtask(() => cubit.fetchPopularMovies());
   }
 
   @override

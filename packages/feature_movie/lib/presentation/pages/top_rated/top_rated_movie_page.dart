@@ -7,17 +7,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class TopRatedMoviesPage extends StatefulWidget {
   static const ROUTE_NAME = 'RoutePaths.watchlist';
 
+  const TopRatedMoviesPage({super.key});
+
   @override
-  _TopRatedMoviesPageState createState() => _TopRatedMoviesPageState();
+  State<TopRatedMoviesPage> createState() => _TopRatedMoviesPageState();
 }
 
 class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(
-      () => context.read<TopRatedMoviesCubit>().fetchTopRatedMovies(),
-    );
+    final cubit = context.read<TopRatedMoviesCubit>();
+    Future.microtask(() => cubit.fetchTopRatedMovies());
   }
 
   @override
@@ -48,4 +49,5 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
       ),
     );
   }
+// ignore_for_file: constant_identifier_names
 }

@@ -12,14 +12,15 @@ class WatchlistPage extends StatefulWidget {
   const WatchlistPage({super.key});
 
   @override
-  _WatchlistPageState createState() => _WatchlistPageState();
+  State<WatchlistPage> createState() => _WatchlistPageState();
 }
 
 class _WatchlistPageState extends State<WatchlistPage> with RouteAware {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => context.read<WatchlistCubit>().fetchWatchlist());
+    final cubit = context.read<WatchlistCubit>();
+    Future.microtask(() => cubit.fetchWatchlist());
   }
 
   @override
@@ -29,15 +30,18 @@ class _WatchlistPageState extends State<WatchlistPage> with RouteAware {
   }
 
   Future<void> _onContentTap(BuildContext context, Content content) async {
+    final watchlistCubit = context.read<WatchlistCubit>();
     if (content.contentType == ContentType.movie) {
       final value = await context.push('${RoutePaths.movies}/${content.id}');
+      if (!mounted) return;
       if (value == null) {
-        await context.read<WatchlistCubit>().fetchWatchlist();
+        await watchlistCubit.fetchWatchlist();
       }
     } else if (content.contentType == ContentType.tvSeries) {
       final value = await context.push('${RoutePaths.tv}/${content.id}');
+      if (!mounted) return;
       if (value == null) {
-        await context.read<WatchlistCubit>().fetchWatchlist();
+        await watchlistCubit.fetchWatchlist();
       }
     }
   }

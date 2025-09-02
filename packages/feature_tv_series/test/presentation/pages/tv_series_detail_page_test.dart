@@ -1,8 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:core/common/failure.dart';
 import 'package:feature_tv_series/domain/entities/tv_series.dart';
-import 'package:feature_tv_series/domain/entities/tv_series_detail.dart';
 import 'package:feature_tv_series/domain/usecases/get_tv_series_detail.dart';
 import 'package:feature_tv_series/domain/usecases/get_tv_series_recommendations.dart';
 import 'package:feature_tv_series/domain/usecases/get_watchlist_status_tv_series.dart';

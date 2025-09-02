@@ -1,7 +1,5 @@
 // test/features/movie_feature/presentation/pages/movie_content_test.dart
 
-import 'package:bloc_test/bloc_test.dart';
-import 'package:feature_movie/domain/entities/movie.dart';
 import 'package:feature_movie/presentation/cubit/now_playing/now_playing_movies_cubit.dart';
 import 'package:feature_movie/presentation/cubit/now_playing/now_playing_movies_state.dart';
 import 'package:feature_movie/presentation/cubit/popular/popular_movies_cubit.dart';

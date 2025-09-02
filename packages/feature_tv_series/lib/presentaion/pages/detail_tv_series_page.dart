@@ -16,16 +16,17 @@ class TvSeriesDetailPage extends StatefulWidget {
   const TvSeriesDetailPage({super.key, required this.id});
 
   @override
-  _TvSeriesDetailPageState createState() => _TvSeriesDetailPageState();
+  State<TvSeriesDetailPage> createState() => _TvSeriesDetailPageState();
 }
 
 class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
   @override
   void initState() {
     super.initState();
+    final cubit = context.read<TvSeriesDetailCubit>();
     Future.microtask(() {
-      context.read<TvSeriesDetailCubit>().fetchTvSeriesDetail(widget.id);
-      context.read<TvSeriesDetailCubit>().loadWatchlistStatus(widget.id);
+      cubit.fetchTvSeriesDetail(widget.id);
+      cubit.loadWatchlistStatus(widget.id);
     });
   }
 

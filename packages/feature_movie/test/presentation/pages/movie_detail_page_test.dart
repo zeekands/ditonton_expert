@@ -2,10 +2,7 @@
 
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:core/common/failure.dart';
-import 'package:core/domain/usecases/no_params.dart';
 import 'package:feature_movie/domain/entities/movie.dart';
-import 'package:feature_movie/domain/entities/movie_detail.dart';
 import 'package:feature_movie/domain/usecases/get_movie_detail.dart';
 import 'package:feature_movie/domain/usecases/get_movie_recommendations.dart';
 import 'package:feature_movie/domain/usecases/get_watchlist_status.dart';
@@ -53,7 +50,7 @@ void main() {
     );
   });
 
-  Widget _makeTestableWidget(Widget body) {
+  Widget makeTestableWidget(Widget body) {
     return BlocProvider<MovieDetailCubit>.value(
       value: cubit,
       child: MaterialApp(home: body),
@@ -82,7 +79,7 @@ void main() {
     mockAllLoaded();
 
     cubit.fetchMovieDetail(tId);
-    await tester.pumpWidget(_makeTestableWidget(MovieDetailPage(id: tId)));
+    await tester.pumpWidget(makeTestableWidget(MovieDetailPage(id: tId)));
 
     expect(find.byType(CircularProgressIndicator), findsOneWidget);
   });
@@ -92,7 +89,7 @@ void main() {
   ) async {
     mockAllLoaded();
     cubit.fetchMovieDetail(tId);
-    await tester.pumpWidget(_makeTestableWidget(MovieDetailPage(id: tId)));
+    await tester.pumpWidget(makeTestableWidget(MovieDetailPage(id: tId)));
     expect(find.byType(DetailContent), findsOneWidget);
   });
 
@@ -111,7 +108,7 @@ void main() {
 
       cubit.fetchMovieDetail(tId);
       cubit.loadWatchlistStatus(tId);
-      await tester.pumpWidget(_makeTestableWidget(MovieDetailPage(id: tId)));
+      await tester.pumpWidget(makeTestableWidget(MovieDetailPage(id: tId)));
 
       final watchlistButtonIcon = find.byIcon(Icons.add);
       expect(watchlistButtonIcon, findsOneWidget);
@@ -133,7 +130,7 @@ void main() {
 
       cubit.fetchMovieDetail(tId);
       cubit.loadWatchlistStatus(tId);
-      await tester.pumpWidget(_makeTestableWidget(MovieDetailPage(id: tId)));
+      await tester.pumpWidget(makeTestableWidget(MovieDetailPage(id: tId)));
 
       final watchlistButtonIcon = find.byIcon(Icons.check);
       expect(watchlistButtonIcon, findsOneWidget);

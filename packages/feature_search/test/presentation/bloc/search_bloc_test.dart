@@ -1,7 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:core/common/failure.dart';
-import 'package:core/common/content.dart';
 import 'package:feature_movie/domain/entities/movie.dart';
 import 'package:feature_movie/domain/usecases/search_movie.dart';
 import 'package:feature_search/presentation/bloc/search_bloc.dart';
@@ -82,4 +81,3 @@ void main() {
     ],
   );
 }
-

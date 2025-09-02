@@ -151,3 +151,4 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
     }
   }
 }
+// ignore_for_file: constant_identifier_names

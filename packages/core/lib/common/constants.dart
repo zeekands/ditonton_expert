@@ -12,3 +12,4 @@ class RoutePaths {
   static const String popularTvSeries = '/popular-tv-series';
   static const String topRatedTvSeries = '/top-rated-tv-series';
 }
+// ignore_for_file: constant_identifier_names

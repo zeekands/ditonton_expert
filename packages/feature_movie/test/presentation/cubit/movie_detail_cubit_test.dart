@@ -1,9 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:core/common/failure.dart';
-import 'package:core/domain/usecases/no_params.dart';
 import 'package:feature_movie/domain/entities/movie.dart';
-import 'package:feature_movie/domain/entities/movie_detail.dart';
 import 'package:feature_movie/domain/usecases/get_movie_detail.dart';
 import 'package:feature_movie/domain/usecases/get_movie_recommendations.dart';
 import 'package:feature_movie/domain/usecases/get_watchlist_status.dart';
@@ -52,7 +50,6 @@ void main() {
   final tId = 1;
   final tMovieRecommendations = <Movie>[];
   final tMovieDetail = testMovieDetail;
-  final tMovieWatchlist = testWatchlistMovie;
 
   test('initial state should be initial', () {
     expect(cubit.state, const MovieDetailState.initial());

@@ -16,17 +16,20 @@ class TvSeriesContent extends StatefulWidget {
   const TvSeriesContent({super.key});
 
   @override
-  _TvSeriesContentState createState() => _TvSeriesContentState();
+  State<TvSeriesContent> createState() => _TvSeriesContentState();
 }
 
 class _TvSeriesContentState extends State<TvSeriesContent> {
   @override
   void initState() {
     super.initState();
+    final nowPlaying = context.read<NowPlayingTvSeriesCubit>();
+    final popular = context.read<PopularTvSeriesCubit>();
+    final topRated = context.read<TopRatedTvSeriesCubit>();
     Future.microtask(() {
-      context.read<NowPlayingTvSeriesCubit>().fetchNowPlayingTvSeries();
-      context.read<PopularTvSeriesCubit>().fetchPopularTvSeries();
-      context.read<TopRatedTvSeriesCubit>().fetchTopRatedTvSeries();
+      nowPlaying.fetchNowPlayingTvSeries();
+      popular.fetchPopularTvSeries();
+      topRated.fetchTopRatedTvSeries();
     });
   }
 

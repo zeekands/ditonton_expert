@@ -13,19 +13,20 @@ import 'package:shared_ui/widget/rating_bar.dart';
 
 class MovieDetailPage extends StatefulWidget {
   final int id;
-  const MovieDetailPage({Key? key, required this.id}) : super(key: key);
+  const MovieDetailPage({super.key, required this.id});
 
   @override
-  _MovieDetailPageState createState() => _MovieDetailPageState();
+  State<MovieDetailPage> createState() => _MovieDetailPageState();
 }
 
 class _MovieDetailPageState extends State<MovieDetailPage> {
   @override
   void initState() {
     super.initState();
+    final cubit = context.read<MovieDetailCubit>();
     Future.microtask(() {
-      context.read<MovieDetailCubit>().fetchMovieDetail(widget.id);
-      context.read<MovieDetailCubit>().loadWatchlistStatus(widget.id);
+      cubit.fetchMovieDetail(widget.id);
+      cubit.loadWatchlistStatus(widget.id);
     });
   }
 
@@ -77,7 +78,8 @@ class DetailContent extends StatelessWidget {
   final List<Movie> recommendations;
   final bool isAddedWatchlist;
 
-  DetailContent(this.movie, this.recommendations, this.isAddedWatchlist);
+  const DetailContent(this.movie, this.recommendations, this.isAddedWatchlist,
+      {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -223,7 +225,7 @@ class DetailContent extends StatelessWidget {
   String _showGenres(List<Genre> genres) {
     String result = '';
     for (var genre in genres) {
-      result += genre.name + ', ';
+      result += '${genre.name}, ';
     }
     return result.isEmpty ? '' : result.substring(0, result.length - 2);
   }

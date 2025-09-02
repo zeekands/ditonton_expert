@@ -98,3 +98,4 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
     }
   }
 }
+// ignore_for_file: constant_identifier_names

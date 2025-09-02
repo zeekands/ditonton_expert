@@ -16,17 +16,20 @@ class MovieContent extends StatefulWidget {
   const MovieContent({super.key});
 
   @override
-  _MovieContentState createState() => _MovieContentState();
+  State<MovieContent> createState() => _MovieContentState();
 }
 
 class _MovieContentState extends State<MovieContent> {
   @override
   void initState() {
     super.initState();
+    final nowPlaying = context.read<NowPlayingMoviesCubit>();
+    final popular = context.read<PopularMoviesCubit>();
+    final topRated = context.read<TopRatedMoviesCubit>();
     Future.microtask(() {
-      context.read<NowPlayingMoviesCubit>().fetchNowPlayingMovies();
-      context.read<PopularMoviesCubit>().fetchPopularMovies();
-      context.read<TopRatedMoviesCubit>().fetchTopRatedMovies();
+      nowPlaying.fetchNowPlayingMovies();
+      popular.fetchPopularMovies();
+      topRated.fetchTopRatedMovies();
     });
   }
 

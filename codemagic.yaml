@@ -8,12 +8,6 @@ workflows:
       groups:
         - tmdb_api
 
-    trigger:
-      # Pemicu saat ada push ke branch 'main'
-      branch_patterns:
-        - pattern: 'main'
-          include: true
-
     scripts:
       # --- Setup & Dependencies ---
       - name: Install Flutter and Melos

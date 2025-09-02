@@ -2,7 +2,7 @@
 name: ditonton_expert   
 
 packages:
-  - packages/**
+  - packages/*
 
 commands:
   bootstrap:

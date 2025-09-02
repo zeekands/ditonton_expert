@@ -29,20 +29,29 @@ dependencies:
   go_router: ^16.2.1
   flutter_bloc: ^9.1.1
   shared_preferences: ^2.5.3
-  melos: ^7.1.0
   get_it: any
   http: any
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
   build_runner: ^2.4.6
   flutter_lints: ^5.0.0
+  melos: ^7.1.0
+
 
 flutter:
   assets:
     - packages/feature_about/assets/
     - assets/
   uses-material-design: true
+
+melos:
+  scripts:
+    pub-get:
+      run: flutter pub get
+      description: Run `flutter pub get` in all packages
+      
 workspace:
   - packages/core
   - packages/shared_ui
@@ -53,6 +62,3 @@ workspace:
   - packages/feature_search
   - packages/feature_watchlist
 
-scripts:
-  pub-get:
-    run: flutter pub get

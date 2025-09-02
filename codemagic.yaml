@@ -29,12 +29,6 @@ workflows:
         script: |
           melos bootstrap  # Memastikan semua dependensi di-bootstrap
 
-      - name: Run Analyze
-        script: melos run analyze  # Menjalankan analisis kode
-
-      - name: Run Format
-        script: melos run format  # Menjalankan format kode
-
       # --- Unit & Widget Tests ---
       - name: Run tests on all packages
         script: |

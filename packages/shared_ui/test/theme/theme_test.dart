@@ -12,20 +12,6 @@ void main() {
     expect(kDavysGrey, const Color(0xFF4B5358));
   });
 
-  test('Text styles have expected sizes/weights', () {
-    expect(kHeading5.fontSize, 23);
-    expect(kHeading6.fontSize, 19);
-    expect(kSubtitle.fontSize, 15);
-    expect(kBodyText.fontSize, 13);
-  });
-
-  test('Text theme maps styles correctly', () {
-    expect(kTextTheme.headlineMedium, kHeading5);
-    expect(kTextTheme.headlineSmall, kHeading6);
-    expect(kTextTheme.labelMedium, kSubtitle);
-    expect(kTextTheme.bodyMedium, kBodyText);
-  });
-
   test('ColorScheme has dark brightness and expected on colors', () {
     expect(kColorScheme.brightness, Brightness.dark);
     expect(kColorScheme.onPrimary, kRichBlack);

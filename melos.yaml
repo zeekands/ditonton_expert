@@ -1,0 +1,9 @@
+# melos.yaml
+name: ditonton_expert
+
+packages:
+  - 'packages/**'
+
+commands:
+  test:
+    exec: flutter test --no-pub

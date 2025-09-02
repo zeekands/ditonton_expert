@@ -1,0 +1,55 @@
+# codemagic.yaml
+workflows:
+  flutter-monorepo-build:
+    name: Flutter Ditonton Build
+    instance_type: mac_mini_m1
+    
+    environment:
+      # Versi Flutter yang digunakan
+      flutter_version: "3.10.0"
+
+      # API Key untuk TMDB (dikonfigurasi di CodeMagic UI)
+      groups:
+        - tmdb_api
+
+    scripts:
+      # --- Setup & Dependencies ---
+      - name: Install Flutter and Melos
+        script: |
+          flutter channel stable
+          flutter upgrade
+          flutter pub global activate melos
+
+      - name: Get dependencies and link packages
+        script: |
+          # Melos akan menjalankan 'flutter pub get' di semua modul
+          melos run pub-get
+
+      # --- Unit & Widget Tests ---
+      - name: Run tests on all packages
+        script: |
+          # Melos akan menjalankan 'flutter test' di semua modul
+          melos run test
+
+      # --- Build Android AppBundle ---
+      - name: Build Android APK
+        script: |
+          # Gunakan 'flutter build apk' untuk membuat APK release
+          flutter build apk --release --dart-define=API_KEY=$CM_API_KEY
+        
+      # --- Build iOS App ---
+      - name: Build iOS IPA
+        script: |
+          # Gunakan 'flutter build ipa' untuk membuat IPA release
+          flutter build ipa --release --dart-define=API_KEY=$CM_API_KEY
+          
+    # Lokasi file hasil build
+    artifacts:
+      - build/app/outputs/flutter-apk/*.apk
+      - build/ios/ipa/*.ipa
+
+    # Proses publishing (opsional)
+    publishing:
+      email:
+        recipients:
+          - azizkandias11@gmail.com

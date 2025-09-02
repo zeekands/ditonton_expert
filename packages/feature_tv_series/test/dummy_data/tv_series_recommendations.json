@@ -1,0 +1,28 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "backdrop_path": "/recommendation_backdrop.jpg",
+      "first_air_date": "2021-03-19",
+      "genre_ids": [
+        10765,
+        18,
+        9642
+      ],
+      "id": 2,
+      "name": "Another TV Show",
+      "origin_country": [
+        "US"
+      ],
+      "original_language": "en",
+      "original_name": "Another Original TV Show",
+      "overview": "This is a dummy overview for a recommended TV series. The content is used for testing the recommendations feature.",
+      "popularity": 89.123,
+      "poster_path": "/recommendation_poster.jpg",
+      "vote_average": 8.0,
+      "vote_count": 500
+    }
+  ],
+  "total_pages": 1,
+  "total_results": 1
+}

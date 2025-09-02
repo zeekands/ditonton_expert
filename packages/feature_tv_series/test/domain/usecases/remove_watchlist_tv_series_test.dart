@@ -1,0 +1,30 @@
+import 'package:dartz/dartz.dart';
+import 'package:feature_tv_series/domain/entities/tv_series_detail.dart';
+import 'package:feature_tv_series/domain/usecases/remove_watchlist_tv_series.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
+
+import '../../dummy_data/dummy_objects.dart';
+import '../../helper/test_helper.mocks.dart';
+
+void main() {
+  late RemoveWatchlistTvSeries usecase;
+  late MockTvSeriesRepository mockRepository;
+
+  setUp(() {
+    mockRepository = MockTvSeriesRepository();
+    usecase = RemoveWatchlistTvSeries(mockRepository);
+  });
+
+  final TvSeriesDetail tDetail = testTvSeriesDetail;
+
+  test('should remove tv series from watchlist in repository', () async {
+    when(mockRepository.removeWatchlistTvSeries(tDetail))
+        .thenAnswer((_) async => const Right('Removed from Watchlist'));
+
+    final result = await usecase.execute(tDetail);
+
+    expect(result, const Right('Removed from Watchlist'));
+  });
+}
+

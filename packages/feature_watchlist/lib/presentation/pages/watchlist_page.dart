@@ -54,6 +54,12 @@ class _WatchlistPageState extends State<WatchlistPage> with RouteAware {
               initial: () => SizedBox.shrink(),
               loading: () => Center(child: CircularProgressIndicator()),
               loaded: (watchlist) {
+                if (watchlist.isEmpty) {
+                  return Center(
+                    key: Key('empty_message'),
+                    child: Text('Your watchlist is empty'),
+                  );
+                }
                 return ListView.builder(
                   itemBuilder: (context, index) {
                     final content = watchlist[index];

@@ -1,0 +1,32 @@
+{
+  "backdrop_path": "/path_to_backdrop.jpg",
+  "genres": [
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 10765,
+      "name": "Sci-Fi & Fantasy"
+    }
+  ],
+  "homepage": "https://www.example.com",
+  "id": 1,
+  "name": "Stranger Things",
+  "original_language": "en",
+  "original_name": "Stranger Things",
+  "overview": "Set in the 1980s, a group of young friends living in a small town uncovers a supernatural conspiracy and secret government experiments.",
+  "popularity": 123.456,
+  "poster_path": "/path_to_poster.jpg",
+  "first_air_date": "2016-07-15",
+  "episode_run_time": [
+    50,
+    60
+  ],
+  "number_of_episodes": 34,
+  "number_of_seasons": 4,
+  "status": "Returning Series",
+  "tagline": "The world is turning upside down.",
+  "vote_average": 8.6,
+  "vote_count": 12345
+}

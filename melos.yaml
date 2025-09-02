@@ -1,8 +1,8 @@
 # melos.yaml
-name: ditonton_expert
+name: ditonton_expert   
 
 packages:
-  - 'packages/**'
+  - packages/**
 
 commands:
   test:

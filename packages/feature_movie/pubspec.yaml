@@ -31,3 +31,4 @@ dev_dependencies:
   bloc_test: ^10.0.0
 
 flutter:
+resolution: workspace

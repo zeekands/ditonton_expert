@@ -8,6 +8,12 @@ workflows:
       # API Key untuk TMDB (dikonfigurasi di CodeMagic UI)
       groups:
         - tmdb_api
+    trigger:
+      # Pemicu saat ada push ke branch 'main'
+      # Anda bisa mengganti 'main' dengan nama branch lain (misalnya 'master' atau 'dev')
+      branch_patterns:
+        - pattern: 'main'
+          include: true
 
     scripts:
       # --- Setup & Dependencies ---

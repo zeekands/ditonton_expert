@@ -51,7 +51,7 @@ dependencies:
   go_router: ^16.2.1
   flutter_bloc: ^9.1.1
   shared_preferences: ^2.5.3
-
+  melos: ^7.1.0
   get_it: any
   http: any
 dev_dependencies:
@@ -111,3 +111,16 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+workspace:
+  - packages/core
+  - packages/shared_ui
+  - packages/feature_setting
+  - packages/feature_about
+  - packages/feature_movie
+  - packages/feature_tv_series
+  - packages/feature_search
+  - packages/feature_watchlist
+
+scripts:
+  pub-get:
+    run: flutter pub get

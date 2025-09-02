@@ -53,3 +53,20 @@ workflows:
       email:
         recipients:
           - azizkandias11@gmail.com
+    triggering:
+      events:
+        - pull_request
+        - push
+    scripts:
+      - name: Melos Bootstrap
+         script: |
+           dart pub global activate melos
+           melos bootstrap 
+            - name: Run Analyze
+         script: melos run analyze
+
+      - name: Run Format
+         script: melos run format
+
+      - name: Run Tests
+         script: melos run test

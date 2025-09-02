@@ -52,6 +52,11 @@ class App extends StatelessWidget {
             backgroundColor: kRichBlack,
             type: BottomNavigationBarType.fixed,
           ),
+          appBarTheme: const AppBarTheme(
+            backgroundColor: kRichBlack,
+            foregroundColor: Colors.white,
+            centerTitle: true,
+          ),
         ),
         debugShowCheckedModeBanner: false,
       ),

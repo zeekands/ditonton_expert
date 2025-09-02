@@ -24,6 +24,16 @@ workflows:
         script: |
           # Melos akan menjalankan 'flutter pub get' di semua modul
           melos run pub-get
+          scripts:
+      - name: Melos Bootstrap
+        script: |
+           dart pub global activate melos
+           melos bootstrap 
+            - name: Run Analyze
+        script: melos run analyze
+
+      - name: Run Format
+        script: melos run format
 
       # --- Unit & Widget Tests ---
       - name: Run tests on all packages
@@ -35,13 +45,13 @@ workflows:
       - name: Build Android APK
         script: |
           # Gunakan 'flutter build apk' untuk membuat APK release
-          flutter build apk --release --dart-define=API_KEY=$CM_API_KEY
+          flutter build apk --release 
 
       # --- Build iOS App ---
       - name: Build iOS IPA
         script: |
           # Gunakan 'flutter build ipa' untuk membuat IPA release
-          flutter build ipa --release --dart-define=API_KEY=$CM_API_KEY
+          flutter build ipa --release 
           
     # Lokasi file hasil build
     artifacts:
@@ -57,16 +67,4 @@ workflows:
       events:
         - pull_request
         - push
-    scripts:
-      - name: Melos Bootstrap
-         script: |
-           dart pub global activate melos
-           melos bootstrap 
-            - name: Run Analyze
-         script: melos run analyze
 
-      - name: Run Format
-         script: melos run format
-
-      - name: Run Tests
-         script: melos run test

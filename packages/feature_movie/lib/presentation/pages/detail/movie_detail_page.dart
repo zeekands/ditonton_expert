@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_ui/widget/rating_bar.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 
 class MovieDetailPage extends StatefulWidget {
   final int id;
@@ -20,6 +21,7 @@ class MovieDetailPage extends StatefulWidget {
 }
 
 class _MovieDetailPageState extends State<MovieDetailPage> {
+  bool _loggedView = false;
   @override
   void initState() {
     super.initState();
@@ -37,6 +39,15 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
         listener: (context, state) {
           state.whenOrNull(
             loaded: (movieDetail, recommendations, isAdded, message) {
+              // Log first view of item
+              if (!_loggedView) {
+                _loggedView = true;
+                FirebaseAnalytics.instance.logEvent(name: 'view_item', parameters: {
+                  'item_id': movieDetail.id,
+                  'item_name': movieDetail.title,
+                  'content_type': 'movie',
+                });
+              }
               if (message == MovieDetailCubit.watchlistAddSuccessMessage ||
                   message == MovieDetailCubit.watchlistRemoveSuccessMessage) {
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -44,6 +55,17 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                     key: Key('watchlist_message'),
                     content: Text(message),
                   ),
+                );
+                // Log wishlist modifications
+                FirebaseAnalytics.instance.logEvent(
+                  name: message == MovieDetailCubit.watchlistAddSuccessMessage
+                      ? 'add_to_wishlist'
+                      : 'remove_from_wishlist',
+                  parameters: {
+                    'item_id': movieDetail.id,
+                    'item_name': movieDetail.title,
+                    'content_type': 'movie',
+                  },
                 );
               } else if (message.isNotEmpty) {
                 showDialog(
@@ -162,6 +184,15 @@ class DetailContent extends StatelessWidget {
                                     padding: const EdgeInsets.all(4.0),
                                     child: InkWell(
                                       onTap: () {
+                                        FirebaseAnalytics.instance.logEvent(
+                                          name: 'select_item',
+                                          parameters: {
+                                            'item_id': movie.id,
+                                            'item_name': movie.title ?? '',
+                                            'content_type': 'movie',
+                                            'list': 'recommendations',
+                                          },
+                                        );
                                         context.push(
                                           '${RoutePaths.movies}/${movie.id}',
                                         );

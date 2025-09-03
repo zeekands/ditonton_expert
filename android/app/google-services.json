@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "318008520102",
+    "project_id": "ditonton-expert-9e3c0",
+    "storage_bucket": "ditonton-expert-9e3c0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:318008520102:android:33df4809f27340b503b367",
+        "android_client_info": {
+          "package_name": "com.zeekands.ditonton_expert"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcHMEUMeRYJpOKupdfBWZv4yyxqe_o5gk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

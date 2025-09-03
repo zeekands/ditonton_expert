@@ -31,6 +31,9 @@ dependencies:
   shared_preferences: ^2.5.3
   get_it: any
   http: any
+  firebase_core: any
+  firebase_analytics: any
+  firebase_crashlytics: any
 
 dev_dependencies:
   flutter_test:
@@ -65,4 +68,3 @@ workspace:
   - packages/feature_tv_series
   - packages/feature_search
   - packages/feature_watchlist
-

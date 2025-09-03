@@ -1,5 +1,6 @@
 import 'package:core/common/constants.dart';
 import 'package:feature_about/about_page.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:feature_movie/presentation/pages/popular/popular_movie_page.dart';
 import 'package:feature_movie/presentation/pages/top_rated/top_rated_movie_page.dart';
 import 'package:feature_search/router.dart';
@@ -22,6 +23,9 @@ import 'package:feature_movie/presentation/pages/movie_list/movie_list_page.dart
 import 'package:flutter/material.dart';
 
 final router = GoRouter(
+  observers: [
+    FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
+  ],
   initialLocation: RoutePaths.home,
   routes: [
     GoRoute(

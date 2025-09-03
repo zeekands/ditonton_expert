@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_ui/widget/rating_bar.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 
 class TvSeriesDetailPage extends StatefulWidget {
   final int id;
@@ -20,6 +21,7 @@ class TvSeriesDetailPage extends StatefulWidget {
 }
 
 class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
+  bool _loggedView = false;
   @override
   void initState() {
     super.initState();
@@ -37,12 +39,32 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
         listener: (context, state) {
           state.whenOrNull(
             loaded: (tvSeries, recommendations, isAdded, message) {
+              // Log first view of item
+              if (!_loggedView) {
+                _loggedView = true;
+                FirebaseAnalytics.instance.logEvent(name: 'view_item', parameters: {
+                  'item_id': tvSeries.id,
+                  'item_name': tvSeries.name,
+                  'content_type': 'tv',
+                });
+              }
               if (message == TvSeriesDetailCubit.watchlistAddSuccessMessage ||
                   message ==
                       TvSeriesDetailCubit.watchlistRemoveSuccessMessage) {
                 ScaffoldMessenger.of(
                   context,
                 ).showSnackBar(SnackBar(content: Text(message)));
+                // Log wishlist modifications
+                FirebaseAnalytics.instance.logEvent(
+                  name: message == TvSeriesDetailCubit.watchlistAddSuccessMessage
+                      ? 'add_to_wishlist'
+                      : 'remove_from_wishlist',
+                  parameters: {
+                    'item_id': tvSeries.id,
+                    'item_name': tvSeries.name,
+                    'content_type': 'tv',
+                  },
+                );
               } else if (message.isNotEmpty) {
                 showDialog(
                   context: context,
@@ -171,6 +193,15 @@ class DetailContent extends StatelessWidget {
                                     padding: const EdgeInsets.all(4.0),
                                     child: InkWell(
                                       onTap: () {
+                                        FirebaseAnalytics.instance.logEvent(
+                                          name: 'select_item',
+                                          parameters: {
+                                            'item_id': tvSeries.id,
+                                            'item_name': tvSeries.name ?? '',
+                                            'content_type': 'tv',
+                                            'list': 'recommendations',
+                                          },
+                                        );
                                         context.push(
                                           '${RoutePaths.tv}/${tvSeries.id}',
                                         );

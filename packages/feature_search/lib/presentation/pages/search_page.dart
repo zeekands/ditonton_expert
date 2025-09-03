@@ -1,4 +1,5 @@
 import 'package:core/common/constants.dart';
+import 'dart:async';
 import 'package:feature_search/presentation/bloc/search_event.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_ui/theme.dart';
@@ -6,11 +7,36 @@ import 'package:core/common/content_type.dart';
 import 'package:feature_search/presentation/bloc/search_bloc.dart';
 import 'package:feature_search/presentation/bloc/search_state.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_ui/widget/content_card.dart';
 
-class SearchPage extends StatelessWidget {
+class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
+
+  @override
+  State<SearchPage> createState() => _SearchPageState();
+}
+
+class _SearchPageState extends State<SearchPage> {
+  String _lastLoggedQuery = '';
+  Timer? _debounce;
+
+  void _logSearchDebounced(String query) {
+    _debounce?.cancel();
+    _debounce = Timer(const Duration(milliseconds: 600), () {
+      if (query.length >= 3 && query != _lastLoggedQuery) {
+        _lastLoggedQuery = query;
+        FirebaseAnalytics.instance.logSearch(searchTerm: query);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _debounce?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +52,7 @@ class SearchPage extends StatelessWidget {
                 context.read<SearchBloc>().add(
                   SearchEvent.onQueryChanged(query: query),
                 );
+                _logSearchDebounced(query);
               },
               decoration: InputDecoration(
                 hintText: 'Search title',
@@ -33,6 +60,11 @@ class SearchPage extends StatelessWidget {
                 border: OutlineInputBorder(),
               ),
               textInputAction: TextInputAction.search,
+              onSubmitted: (query) {
+                if (query.isNotEmpty) {
+                  FirebaseAnalytics.instance.logSearch(searchTerm: query);
+                }
+              },
             ),
             SizedBox(height: 16),
             Text('Search Result', style: kHeading6),
@@ -75,6 +107,15 @@ class SearchPage extends StatelessWidget {
                           return ContentCard(
                             content: content,
                             onTap: () {
+                              FirebaseAnalytics.instance.logEvent(
+                                name: 'select_item',
+                                parameters: {
+                                  'item_id': content.id,
+                                  'item_name': content.title ?? '',
+                                  'content_type': content.contentType,
+                                  'list': 'search_results',
+                                },
+                              );
                               if (content.contentType == ContentType.movie) {
                                 context.push(
                                   '${RoutePaths.movies}/${content.id}',

@@ -7,7 +7,7 @@ import 'package:core/common/content_type.dart';
 import 'package:feature_search/presentation/bloc/search_bloc.dart';
 import 'package:feature_search/presentation/bloc/search_state.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:ditonton_expert/analytics.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_ui/widget/content_card.dart';
 
@@ -27,7 +27,7 @@ class _SearchPageState extends State<SearchPage> {
     _debounce = Timer(const Duration(milliseconds: 600), () {
       if (query.length >= 3 && query != _lastLoggedQuery) {
         _lastLoggedQuery = query;
-        FirebaseAnalytics.instance.logSearch(searchTerm: query);
+        Analytics.safeLogSearch(query);
       }
     });
   }
@@ -62,7 +62,7 @@ class _SearchPageState extends State<SearchPage> {
               textInputAction: TextInputAction.search,
               onSubmitted: (query) {
                 if (query.isNotEmpty) {
-                  FirebaseAnalytics.instance.logSearch(searchTerm: query);
+                  Analytics.safeLogSearch(query);
                 }
               },
             ),
@@ -107,7 +107,7 @@ class _SearchPageState extends State<SearchPage> {
                           return ContentCard(
                             content: content,
                             onTap: () {
-                              FirebaseAnalytics.instance.logEvent(
+                              Analytics.safeLogEvent(
                                 name: 'select_item',
                                 parameters: {
                                   'item_id': content.id,

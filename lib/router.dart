@@ -22,10 +22,16 @@ import 'package:feature_movie/presentation/pages/movie_list/movie_list_page.dart
 
 import 'package:flutter/material.dart';
 
+List<NavigatorObserver> _buildAnalyticsObservers() {
+  try {
+    return [FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance)];
+  } catch (_) {
+    return const <NavigatorObserver>[];
+  }
+}
+
 final router = GoRouter(
-  observers: [
-    FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
-  ],
+  observers: _buildAnalyticsObservers(),
   initialLocation: RoutePaths.home,
   routes: [
     GoRoute(

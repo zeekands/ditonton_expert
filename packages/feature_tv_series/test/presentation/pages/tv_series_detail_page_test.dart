@@ -14,6 +14,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:flutter/services.dart';
 
 import '../../dummy_data/dummy_objects.dart';
 import 'tv_series_detail_page_test.mocks.dart';
@@ -26,6 +27,14 @@ import 'tv_series_detail_page_test.mocks.dart';
   RemoveWatchlistTvSeriesUseCase,
 ])
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+  // Stub Firebase Analytics method channel to no-op in tests
+  setUpAll(() async {
+    const MethodChannel('plugins.flutter.io/firebase_analytics')
+        .setMockMethodCallHandler((MethodCall methodCall) async {
+      return null;
+    });
+  });
   late MockGetTvSeriesDetailUseCase mockGetDetail;
   late MockGetTvSeriesRecommendationsUseCase mockGetRecs;
   late MockGetWatchlistStatusTvSeriesUseCase mockGetStatus;

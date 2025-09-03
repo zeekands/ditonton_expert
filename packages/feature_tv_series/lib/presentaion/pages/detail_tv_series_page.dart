@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_ui/widget/rating_bar.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:ditonton_expert/analytics.dart';
 
 class TvSeriesDetailPage extends StatefulWidget {
   final int id;
@@ -42,7 +42,7 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
               // Log first view of item
               if (!_loggedView) {
                 _loggedView = true;
-                FirebaseAnalytics.instance.logEvent(name: 'view_item', parameters: {
+                Analytics.safeLogEvent(name: 'view_item', parameters: {
                   'item_id': tvSeries.id,
                   'item_name': tvSeries.name,
                   'content_type': 'tv',
@@ -55,7 +55,7 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
                   context,
                 ).showSnackBar(SnackBar(content: Text(message)));
                 // Log wishlist modifications
-                FirebaseAnalytics.instance.logEvent(
+                Analytics.safeLogEvent(
                   name: message == TvSeriesDetailCubit.watchlistAddSuccessMessage
                       ? 'add_to_wishlist'
                       : 'remove_from_wishlist',
@@ -193,7 +193,7 @@ class DetailContent extends StatelessWidget {
                                     padding: const EdgeInsets.all(4.0),
                                     child: InkWell(
                                       onTap: () {
-                                        FirebaseAnalytics.instance.logEvent(
+                                        Analytics.safeLogEvent(
                                           name: 'select_item',
                                           parameters: {
                                             'item_id': tvSeries.id,

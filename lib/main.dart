@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:ditonton_expert/di.dart' as di;
 import 'package:ditonton_expert/router.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
+// Analytics calls are wrapped in a helper to stay test-safe
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:feature_movie/presentation/cubit/detail/movie_detail_cubit.dart';
@@ -20,6 +20,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_ui/theme.dart';
 import 'package:flutter/foundation.dart';
 import 'firebase_options.dart';
+import 'analytics.dart';
 
 void main() {
   runZonedGuarded(
@@ -41,12 +42,12 @@ void main() {
         await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(
           false,
         );
-        await FirebaseAnalytics.instance.setAnalyticsCollectionEnabled(false);
+        await Analytics.safeSetCollectionEnabled(false);
       }
 
       await di.init();
       runApp(const App());
-      await FirebaseAnalytics.instance.logAppOpen();
+      await Analytics.safeLogAppOpen();
     },
     (error, stack) {
       FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);

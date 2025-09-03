@@ -5,13 +5,18 @@ import 'package:http/io_client.dart';
 
 class CustomHttpClient {
   Future<http.Client> createIOClient() async {
-    final securityContext = SecurityContext.defaultContext;
+    // Use an isolated context so we don't affect global defaults
+    final SecurityContext context = SecurityContext();
     try {
+      // Pin to the TMDB certificate chain (includes leaf + intermediates/roots)
       final ByteData data = await rootBundle.load('assets/tmdb_cert_chain.pem');
-      securityContext.setTrustedCertificatesBytes(data.buffer.asUint8List());
+      context.setTrustedCertificatesBytes(data.buffer.asUint8List());
     } catch (e) {
       throw Exception('Failed to load TMDB certificate: $e');
     }
-    return IOClient(HttpClient(context: securityContext));
+
+    final HttpClient httpClient = HttpClient(context: context);
+    // Enforce hostname verification and TLS by not overriding callbacks
+    return IOClient(httpClient);
   }
 }

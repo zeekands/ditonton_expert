@@ -19,3 +19,15 @@ commands:
     # Only run the test command when the package has a test directory
     run: melos exec --dir-exists=test -- "flutter test"
     description: Run `flutter test` in all packages
+
+scripts:
+  test:unit:
+    run: melos exec --dir-exists=test -- "flutter test -r expanded"
+    description: Run unit tests in all packages
+  test:integration:
+    run: melos exec --dir-exists=integration_test -- "flutter test integration_test -r expanded"
+    description: Run integration tests in all packages
+  test:all:
+    run: |
+      melos run test:unit && melos run test:integration
+    description: Run unit + integration tests in all packages
